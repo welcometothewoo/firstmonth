@@ -46,5 +46,18 @@ def delete():
         writer = csv.writer(writeFile)
         writer.writerows(lines)
    
-    
-
+def update():
+    lines = list()
+    memberName = input("Please enter a member's name to edit: ")
+    with open('contacts.csv', 'r') as readFile:
+        reader = csv.reader(readFile)
+        for row in reader:
+            lines.append(row)
+            for field in row:
+                if field == memberName:
+                    newPhoneNumber = input("Please enter a new phone number: ")
+                    lines.remove(row)
+                    lines.append([memberName, newPhoneNumber])
+    with open('contacts.csv', 'w') as writeFile:
+        writer = csv.writer(writeFile)
+        writer.writerows(lines) 
